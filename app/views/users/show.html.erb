@@ -10,7 +10,7 @@
   }
 %>
 <div class="center">
-  <%= image_tag(@user.image_url, width: 64, height: 64, class: "bg-gray circle") %>
+  <%= image_tag(@user.image_url.sub('cardless-blobs.s3.amazonaws.com', 'cardless.imgix.net') + "?fit=facearea&faceindex=1&facepad=2&w=128&h=128", width: 64, height: 64, class: "bg-gray circle") %>
   <% if @user.name? %>
     <h1 class="h2 mb1 regular mt2">
       <%= @user.name %>
