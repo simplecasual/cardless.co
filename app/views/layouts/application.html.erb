@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Alex Baldwin | Cardless</title>
+    <%= metamagic title: "Cardless", description: "Throw business cards out the window." %>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,10 +12,10 @@
     <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/6.1.6/basscss.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6326032/647188/css/fonts.css" />
     <style>
-      body, .regular {
+      body, .regular, input {
         font-family: 'Ideal Sans SSm A', 'Ideal Sans SSm B'; font-weight: 300; font-style: normal;
       }
-      h1,h2,h3,h4,h5,h6, .bold {
+      h1,h2,h3,h4,h5,h6, .bold, label {
         font-family: 'Ideal Sans SSm A', 'Ideal Sans SSm B'; font-weight: 500; font-style: normal;
       }
       .separator {
@@ -44,8 +44,8 @@
           </div>
           <div class="sm-col-right">
             <% if user_signed_in? %>
-              <%= link_to("Edit Profile", edit_user_registration_path, class: "button py2 button-transparent regular")  %>
-              <%= link_to("Logout", destroy_user_session_path, class: "button py2 button-transparent regular", method: :delete) %>
+              <%= link_to("Show Profile", user_path(current_user), class: "button py2 button-transparent regular")  %>
+              <%= link_to("Edit Account", edit_user_registration_path, class: "button py2 button-transparent regular")  %>
             <% else %>
               <%= link_to("Login", new_user_session_path, class: "button py2 button-transparent regular")  %>
             <% end %>
@@ -54,7 +54,11 @@
       </header>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <%= yield %>
+      <main class="flex flex-auto flex-center">
+        <div class="px2 mx-auto">
+          <%= yield %>
+        </div>
+      </main>
       <footer class="p2 center">
         <p class="light-gray">&copy; <%= Time.now.year %> Simple Casual LLC. All rights reserved.</p>
       </footer>
