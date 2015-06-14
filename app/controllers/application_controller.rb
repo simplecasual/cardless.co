@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
         :username,
         :twitter,
         :name,
+        :current_password,
+        :url,
         :bio
       )
     }
