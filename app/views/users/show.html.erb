@@ -1,1 +1,33 @@
-<%= @user.id %>
+<div class="flex flex-center" style="min-height:100vh">
+  <div class="center mx-auto p4">
+    <img src="https://avatars3.githubusercontent.com/u/305263?v=3"
+    height="64" width="64" class="bg-gray circle" />
+    <% if @user.name? %>
+      <h1 class="h2 mb1 regular mt2">
+        <%= @user.name %>
+      </h1>
+    <% end %>
+
+    <% if @user.twitter? %>
+      <h2 class="regular h4 orange mb1 mt0">
+        <%= "@#{@user.twitter}" %>
+      </h2>
+    <% end %>
+    <span class="separator half-width mx-auto mb2 mt2"></span>
+    <% if @user.bio? %>
+      <p class="italic gray">
+        <%= @user.bio %>
+      </p>
+    <% end %>
+    <p>
+      <a href="/vcard/alexbaldwin.vcf" download="alexbaldwin.vcf">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="32px" height="32px" viewBox="0 0 512 512"
+          enable-background="new 0 0 512 512" xml:space="preserve"> <path
+          fill="#AAA" id="share-4-icon" d="M134.021,328.384c36.645-159.582,219.143-196.722,219.143-196.722V82.534L462,191.191l-108.836,108.66 v-49.129C353.164,250.723,212.039,244.849,134.021,328.384z M354.049,348.426v40.028H91.01V218.083h57.562 c11.502-14.814,24.562-28.487,38.979-41.011H50v252.394h345.059V307.482L354.049,348.426z"/>
+        </svg>
+      </a>
+    </p>
+  </div>
+</div>
