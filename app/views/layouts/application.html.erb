@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <%= csrf_meta_tags %>
+    <%= csrf_meta_tags %>
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/6.1.6/basscss.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6326032/647188/css/fonts.css" />
@@ -29,26 +29,36 @@
       }
     </style>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <%= csrf_meta_tags %>
   </head>
   <body>
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-       <% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>  
-  </li>
-<% end %>
-
-<%= yield %>
+    <div class="flex flex-column" style="min-height:100vh">
+      <header>
+        <nav class="clearfix white bg-black">
+          <div class="sm-col">
+            <%= link_to("Cardless", root_path, class: "button py2 button-transparent")  %>
+          </div>
+          <div class="sm-col-right">
+            <% if user_signed_in? %>
+              <%= link_to("Edit Profile", edit_user_registration_path, class: "button py2 button-transparent regular")  %>
+              <%= link_to("Logout", destroy_user_session_path, class: "button py2 button-transparent regular", method: :delete) %>
+            <% else %>
+              <%= link_to("Login", new_user_session_path, class: "button py2 button-transparent regular")  %>
+            <% end %>
+          </div>
+        </nav>
+      </header>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+      <footer class="p2 center">
+        <p class="light-gray">&copy; <%= Time.now.year %> Simple Casual LLC. All rights reserved.</p>
+      </footer>
+    </div>
 
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

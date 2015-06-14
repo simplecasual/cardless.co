@@ -1,7 +1,6 @@
-<div class="flex flex-center" style="min-height:100vh">
+<main class="flex flex-auto flex-center">
   <div class="center mx-auto p4">
-    <img src="https://avatars3.githubusercontent.com/u/305263?v=3"
-    height="64" width="64" class="bg-gray circle" />
+    <%= image_tag(@user.image_url, width: 64, height: 64, class: "bg-gray circle") %>
     <% if @user.name? %>
       <h1 class="h2 mb1 regular mt2">
         <%= @user.name %>
@@ -28,4 +27,4 @@
       <% end %>
     </p>
   </div>
-</div>
+</main>

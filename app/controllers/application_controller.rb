@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
         :name,
         :current_password,
         :url,
+        :image,
+        :image_cache,
         :bio
       )
     }
