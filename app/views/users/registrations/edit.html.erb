@@ -1,3 +1,53 @@
+<style type="text/css">
+  .autocomplete-suggestions {
+    background: #fff;
+    border-top: 0;
+    border: 1px solid #ccc;
+    box-shadow: -1px 1px 3px rgba(0,0,0,.1);
+    box-sizing: border-box;
+    cursor: default;
+    display: none;
+    max-height: 254px;
+    overflow-y: auto;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    z-index: 9999;
+  }
+
+  .autocomplete-suggestion {
+    color: #333;
+    font-size: 1.02em;
+    overflow: hidden;
+    padding: .6em;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .autocomplete-suggestion b {
+    font-weight: normal;
+    color: #1f8dd6;
+  }
+
+  .autocomplete-suggestion span.icon {
+    width: 25px;
+    display: inline-block;
+  }
+
+  .autocomplete-suggestion span.domain {
+    color: #999;
+    font-size: .8em;
+    position: absolute;
+    right: 5px;
+    text-align: right;
+    top: 14px;
+  }
+
+  .autocomplete-suggestion.selected {
+    background: #f0f0f0;
+  }
+</style>
+
 <h2 class="h1">Edit Account</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true, method: :put }) do |f| %>
@@ -26,6 +76,12 @@
   <div class="field">
     <%= f.label :url %><br />
     <%= f.text_field :url, class: "block full-width mb2 field-light"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :company %><br />
+    <input class="company-name-input block full-width mb2 field-light"
+    name="company" type="text" autocomplete="off">
   </div>
 
   <div class="field">
@@ -64,3 +120,25 @@
 <% end %>
 
 <%= link_to("Logout", destroy_user_session_path, class: "gray block mt2", method: :delete) %>
+
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://s3.amazonaws.com/clearbit-blog/javascripts/jquery.auto-complete.min.js"></script>
+<script type="text/javascript">
+  jQuery(function($) {
+    $('input[name="company"]').autoComplete({
+      minChars: 1,
+      source: function(term, response){
+        $.getJSON('https://autocomplete.clearbit.com/v1/companies/suggest', { query: term }, function(data){ response(data); });
+      },
+      renderItem: function (item, search){
+        container = '<div class="autocomplete-suggestion" data-name="'+item.name+'" data-val="'+search+'">'
+        container += '<span class="icon"><img align="center" src="'+item.logo+'?size=25x25" onerror="this.src=\'http://www.chanur.com/wp-content/uploads/image/genogram/unknown-dead.gif\'"></span> '
+        container += item.name+'<span class="domain">'+item.domain+'</span></div>';
+        return container
+      },
+      onSelect: function(e, term, item){
+        $('input[name="company"]').val(item.data('name'))
+      },
+    });
+  });
+</script>
